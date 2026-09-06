@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mini-data-ml-platform"
+version = "0.1.0"
+description = "A local, production-minded data and ML platform learning lab"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "fastapi==0.115.6",
+  "httpx==0.28.1",
+  "jsonschema==4.23.0",
+  "prometheus-client==0.21.1",
+  "pydantic-settings==2.7.1",
+  "uvicorn==0.34.0",
+]
+
+[project.optional-dependencies]
+data = ["boto3==1.35.94", "kafka-python-ng==2.2.3", "pyspark==3.5.4"]
+ml = ["joblib==1.4.2", "mlflow==2.19.0", "pandas==2.2.3", "scikit-learn==1.6.0"]
+postgres = ["psycopg[binary]==3.2.3"]
+dev = ["pytest==8.3.4", "ruff==0.8.6", "PyYAML==6.0.2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.hatch.build.targets.wheel]
+packages = ["platform"]
+
